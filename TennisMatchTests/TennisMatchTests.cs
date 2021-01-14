@@ -21,5 +21,19 @@ namespace TennisMatchTests
             Assert.AreNotEqual("Player1", match.GetPlayerName(PlayerOrder.player1));
             Assert.AreNotEqual("Player2", match.GetPlayerName(PlayerOrder.player2));
         }
+
+        /// <summary>
+        /// Method to check if the game scores works as expected with tennis values
+        /// </summary>
+        [TestMethod]
+        public void PlayersGameScoresTest()
+        {
+            // arrange
+            var match = new Match("Player1 Name", "Player2 Name");
+
+            // assert
+            Assert.AreEqual("0", match.GetPlayerGameScore(PlayerOrder.player1));
+            Assert.AreEqual("0", match.GetPlayerGameScore(PlayerOrder.player2));
+        }
     }
 }
