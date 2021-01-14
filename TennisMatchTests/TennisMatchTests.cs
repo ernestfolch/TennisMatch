@@ -63,7 +63,7 @@ namespace TennisMatchTests
         /// </summary>
         /// <param name="player1Points">Player1 points inside the game</param>
         /// <param name="player2Points">Player2 points inside the game</param>
-        /// <param name="playerPointWinner">Player point winner</param>
+        /// <param name="playerPointWinner">Player who did the point</param>
         /// <param name="playerPoint">Player who won the point</param>
         /// <param name="resultPlayer1Points">Expected player1 points after the player point</param>
         /// <param name="resultPlayer2Points">Expected player1 points after the player point</param> 
@@ -131,6 +131,11 @@ namespace TennisMatchTests
             }
         }
 
+        /// <summary>
+        /// Auxiliar method to generate a game won by the player
+        /// </summary>
+        /// <param name="match">Match instance</param>
+        /// <param name="player">Player who has to won the game</param>
         private void GeneratePlayerWonGame(Match match, PlayerOrder player)
         {
             for (var j = 0; j < 4; j++)
@@ -143,12 +148,17 @@ namespace TennisMatchTests
             // arrange
             var match = new Match("Player1 Name", "Player2 Name");
 
-            // act
-            GeneratePlayerWonGame(match, PlayerOrder.player1);
+            // act & assert
+            for (var i = 0; i < 5; i++) // set iterations 
+            {
+                for (var j = 0; j < 6; j++) // games iterations 
+                {
+                    GeneratePlayerWonGame(match, PlayerOrder.player1);
 
-            // assert
-            Assert.AreEqual(1, match.GetPlayerSetScore(PlayerOrder.player1, 0));
-            Assert.AreEqual(0, match.GetPlayerSetScore(PlayerOrder.player2, 0));
+                    Assert.AreEqual(j + 1, match.GetPlayerSetScore(PlayerOrder.player1, i));
+                    Assert.AreEqual(0, match.GetPlayerSetScore(PlayerOrder.player2, i));
+                }
+            }
         }
     }
 }
