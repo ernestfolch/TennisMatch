@@ -11,9 +11,12 @@
 
     public class Match
     {
+        private const int NumberOfSets = 5;
+
         private Player Player1 { get; set; }
         private Player Player2 { get; set; }
         private Game CurrentGame { get; set; }
+        private Set[] Sets { get; set; } = new Set[NumberOfSets];
 
         /// <summary>
         /// Class constructor
@@ -26,6 +29,9 @@
             Player2 = new Player(player2Name);
 
             CurrentGame = new Game();
+
+            for (var i = 0; i < NumberOfSets; i++)
+                Sets[i] = new Set();
         }
 
         /// <summary>
@@ -55,7 +61,7 @@
         /// Method to add one point to a player
         /// </summary>
         /// <param name="playerOrder">Player referred</param>
-        /// <returns>the referred player current score in the current game</returns>
+        /// <returns>String with the referred player current score in the current game</returns>
         public string AddPlayerPoint(PlayerOrder playerOrder)
         {
             if (playerOrder == PlayerOrder.player1)
@@ -64,6 +70,20 @@
                 CurrentGame.Player2Points++;
 
             return CurrentGame.GetPlayerPoints(playerOrder);
+        }
+
+        /// <summary>
+        /// Method to ge the games won by a player in an specific set
+        /// </summary>
+        /// <param name="playerOrder">Player referred</param>
+        /// <param name="setNumber">Number of the set</param>
+        /// <returns>Integer with the referred player total amount of won sets</returns>
+        public int GetPlayerSetScore(PlayerOrder playerOrder, int setNumber)
+        {
+            if (playerOrder == PlayerOrder.player1)
+                return Sets[setNumber].Player1Games;
+            else
+                return Sets[setNumber].Player2Games;
         }
     }
 }

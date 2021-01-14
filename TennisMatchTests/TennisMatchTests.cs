@@ -115,7 +115,7 @@ namespace TennisMatchTests
         }
 
         /// <summary>
-        /// Unit test to check if the set start with 0 won games for each player
+        /// Unit test to check if the match starts with 5 sets and each set starts with 0 won games for each player
         /// </summary>
         [TestMethod]
         public void PlayersSetScoresTest()
@@ -124,8 +124,11 @@ namespace TennisMatchTests
             var match = new Match("Player1 Name", "Player2 Name");
 
             // assert
-            Assert.AreEqual(0, match.GetPlayerSetScore(PlayerOrder.player1, 1));
-            Assert.AreEqual(0, match.GetPlayerSetScore(PlayerOrder.player2, 1));
+            for (int i = 0; i < 5; i++)
+            {
+                Assert.AreEqual(0, match.GetPlayerSetScore(PlayerOrder.player1, i));
+                Assert.AreEqual(0, match.GetPlayerSetScore(PlayerOrder.player2, i));
+            }
         }
     }
 }
