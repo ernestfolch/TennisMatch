@@ -163,5 +163,33 @@ namespace TennisMatchTests
                 }
             }
         }
+
+        /// <summary>
+        /// Unit test to check if the tie break special game is working
+        /// </summary>
+        [TestMethod]
+        public void PlayerWonTieBreakSetTest()
+        {
+            // arrange
+            var match = new Match("Player1 Name", "Player2 Name");
+
+            // act
+            for (var i = 0; i < 5; i++)
+                GeneratePlayerWonGame(match, PlayerOrder.player1);
+
+            for (var i = 0; i < 5; i++)
+                GeneratePlayerWonGame(match, PlayerOrder.player2);
+
+            GeneratePlayerWonGame(match, PlayerOrder.player1);
+            GeneratePlayerWonGame(match, PlayerOrder.player2);
+
+            match.AddPlayerPoint(PlayerOrder.player1);
+            match.AddPlayerPoint(PlayerOrder.player1);
+            match.AddPlayerPoint(PlayerOrder.player2);
+
+            // assert
+            Assert.AreEqual("2", match.GetPlayerGameScore(PlayerOrder.player1));
+            Assert.AreEqual("1", match.GetPlayerGameScore(PlayerOrder.player2));
+        }
     }
 }
