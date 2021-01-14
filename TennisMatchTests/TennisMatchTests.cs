@@ -63,7 +63,7 @@ namespace TennisMatchTests
         /// </summary>
         /// <param name="player1Points">Player1 points inside the game</param>
         /// <param name="player2Points">Player2 points inside the game</param>
-        /// <param name="playerOrder">Player referred</param>
+        /// <param name="playerPointWinner">Player point winner</param>
         /// <param name="playerPoint">Player who won the point</param>
         /// <param name="resultPlayer1Points">Expected player1 points after the player point</param>
         /// <param name="resultPlayer2Points">Expected player1 points after the player point</param> 
@@ -100,14 +100,14 @@ namespace TennisMatchTests
         [DataRow(3, 2, PlayerOrder.player2, "deuce", "deuce")]
         [DataRow(3, 3, PlayerOrder.player2, "", "adv")]
         [DataTestMethod]
-        public void AddPlayersPointsTest(int player1Points, int player2Points, PlayerOrder playerOrder, string resultPlayer1Points, string resultPlayer2Points)
+        public void AddPlayersPointsTest(int player1Points, int player2Points, PlayerOrder playerPointWinner, string resultPlayer1Points, string resultPlayer2Points)
         {
             // arrange
             var match = new Match("Player1 Name", "Player2 Name");
 
             // act
             generateMatchGamePoints(match, player1Points, player2Points); // Generate a match with the requested current points
-            match.AddPlayerPoint(playerOrder); // Add one point to the player
+            match.AddPlayerPoint(playerPointWinner); // Add one point to the player
 
             // assert
             Assert.AreEqual(resultPlayer1Points, match.GetPlayerGameScore(PlayerOrder.player1));
@@ -129,6 +129,26 @@ namespace TennisMatchTests
                 Assert.AreEqual(0, match.GetPlayerSetScore(PlayerOrder.player1, i));
                 Assert.AreEqual(0, match.GetPlayerSetScore(PlayerOrder.player2, i));
             }
+        }
+
+        private void GeneratePlayerWonGame(Match match, PlayerOrder player)
+        {
+            for (var j = 0; j < 4; j++)
+                match.AddPlayerPoint(player);
+        }
+
+        [TestMethod]
+        public void PlayerWonGamesTest()
+        {
+            // arrange
+            var match = new Match("Player1 Name", "Player2 Name");
+
+            // act
+            GeneratePlayerWonGame(match, PlayerOrder.player1);
+
+            // assert
+            Assert.AreEqual(1, match.GetPlayerSetScore(PlayerOrder.player1, 0));
+            Assert.AreEqual(0, match.GetPlayerSetScore(PlayerOrder.player2, 0));
         }
     }
 }
