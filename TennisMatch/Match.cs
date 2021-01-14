@@ -31,11 +31,25 @@
             Player1 = new Player(player1Name);
             Player2 = new Player(player2Name);
 
-            CurrentGame = new Game();
-
             CurrentSet = 0;
             for (var i = 0; i < NumberOfSets; i++)
                 Sets[i] = new Set();
+
+            CurrentGame = StartNewGame();
+        }
+
+        /// <summary>
+        /// Auxiliar method to create new game deciding if it is a tie break or not
+        /// </summary>
+        private Game StartNewGame()
+        {
+            var isTieBreak = false;
+
+            if (Sets[CurrentSet].Player1Games == 6 &&
+                Sets[CurrentSet].Player2Games == 6)
+                isTieBreak = true;
+
+            return new Game(isTieBreak);
         }
 
         /// <summary>
@@ -69,7 +83,7 @@
         public string AddPlayerPoint(PlayerOrder playerOrder)
         {
             if (CurrentGame.IsFinished)
-                CurrentGame = new Game();
+                CurrentGame = StartNewGame();
 
             if (playerOrder == PlayerOrder.player1)
                 CurrentGame.Player1Points++;

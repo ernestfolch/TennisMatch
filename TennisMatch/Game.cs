@@ -1,4 +1,6 @@
-﻿namespace TennisMatch
+﻿using System;
+
+namespace TennisMatch
 {
     /// <summary>
     /// Internal class to manage the games inside sets
@@ -8,16 +10,19 @@
         public int Player1Points { get; set; }
         public int Player2Points { get; set; }
         public bool IsFinished { get; set; }
+        private bool IsTieBreak { get; set; }
 
         /// <summary>
         /// Class constructor
         /// </summary>
-        public Game()
+        /// <param name="isTieBreak">To define if the game is a tie break or a normal game</param>
+        public Game(bool isTieBreak = false)
         {
             Player1Points = 0;
             Player2Points = 0;
 
             IsFinished = false;
+            IsTieBreak = isTieBreak;
         }
 
         /// <summary>
@@ -41,6 +46,16 @@
         /// <returns>String containing the tennis score for the referred player</returns>
         private string TranslateScore(int playerPoints, int opponentPoints)
         {
+            // the current game is a tie break game
+            if (IsTieBreak)
+            {
+                if ((playerPoints >= 6 || opponentPoints >= 6) &&
+                    Math.Abs(playerPoints - opponentPoints) >= 2)
+                    IsFinished = true;
+
+                return playerPoints.ToString();
+            }
+
             // players scores arrived to deuce (40-40)
             if (playerPoints >= 3 && opponentPoints >= 3)
             {

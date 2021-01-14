@@ -31,8 +31,11 @@
             else
                 Player2Games++;
 
-            if ((Player1Games == 6 && Player2Games < 5) ||
+            if ((Player1Games == 6 && Player2Games < 5) || // normal game
                 (Player2Games == 6 && Player1Games < 5))
+                IsFinished = true;
+
+            if (Player1Games == 7 || Player2Games == 7) // tie break
                 IsFinished = true;
         }
     }

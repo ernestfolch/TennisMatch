@@ -174,15 +174,17 @@ namespace TennisMatchTests
             var match = new Match("Player1 Name", "Player2 Name");
 
             // act
+            // generate a match at 5-5 sets
             for (var i = 0; i < 5; i++)
                 GeneratePlayerWonGame(match, PlayerOrder.player1);
-
             for (var i = 0; i < 5; i++)
                 GeneratePlayerWonGame(match, PlayerOrder.player2);
 
+            // generate a tie brak 6-6
             GeneratePlayerWonGame(match, PlayerOrder.player1);
             GeneratePlayerWonGame(match, PlayerOrder.player2);
 
+            // add point to the tie break
             match.AddPlayerPoint(PlayerOrder.player1);
             match.AddPlayerPoint(PlayerOrder.player1);
             match.AddPlayerPoint(PlayerOrder.player2);
