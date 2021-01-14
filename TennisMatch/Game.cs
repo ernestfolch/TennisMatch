@@ -7,6 +7,7 @@
     {
         public int Player1Points { get; set; }
         public int Player2Points { get; set; }
+        public bool IsFinished { get; set; }
 
         /// <summary>
         /// Class constructor
@@ -15,6 +16,8 @@
         {
             Player1Points = 0;
             Player2Points = 0;
+
+            IsFinished = false;
         }
 
         /// <summary>
@@ -49,6 +52,7 @@
                     return "";
             }
 
+            // normal game points
             switch (playerPoints)
             {
                 case 3:
@@ -60,7 +64,13 @@
                 case 0:
                     return "0"; // love
                 default:
-                    return (playerPoints > opponentPoints) ? "game" : "";
+                    if (playerPoints > opponentPoints)
+                    {
+                        IsFinished = true;
+                        return "game";
+                    }
+                    else
+                        return "";
             }
         }
     }

@@ -17,6 +17,7 @@
         private Player Player2 { get; set; }
         private Game CurrentGame { get; set; }
         private Set[] Sets { get; set; } = new Set[NumberOfSets];
+        private int CurrentSet { get; set; }
 
         /// <summary>
         /// Class constructor
@@ -30,6 +31,7 @@
 
             CurrentGame = new Game();
 
+            CurrentSet = 0;
             for (var i = 0; i < NumberOfSets; i++)
                 Sets[i] = new Set();
         }
@@ -64,12 +66,19 @@
         /// <returns>String with the referred player current score in the current game</returns>
         public string AddPlayerPoint(PlayerOrder playerOrder)
         {
+            if (CurrentGame.IsFinished)
+                CurrentGame = new Game();
+
             if (playerOrder == PlayerOrder.player1)
                 CurrentGame.Player1Points++;
             else
                 CurrentGame.Player2Points++;
 
-            return CurrentGame.GetPlayerPoints(playerOrder);
+            var points = CurrentGame.GetPlayerPoints(playerOrder);
+            if (CurrentGame.IsFinished)
+                Sets[CurrentSet].AddPlayerGame(playerOrder);
+
+            return points;
         }
 
         /// <summary>
