@@ -7,7 +7,7 @@ namespace TennisMatchTests
     public class TennisMatchTests
     {
         /// <summary>
-        /// Method to check that the match player names are well managed
+        /// Unit test to check that the match player names are well managed
         /// </summary>
         [TestMethod]
         public void GetPlayersNameTest()
@@ -23,7 +23,7 @@ namespace TennisMatchTests
         }
 
         /// <summary>
-        /// Method to check if the game scores works as expected with tennis values
+        /// Unit test to check if the game scores works as expected with tennis values
         /// </summary>
         [TestMethod]
         public void PlayersGameScoresTest()
@@ -33,6 +33,22 @@ namespace TennisMatchTests
 
             // assert
             Assert.AreEqual("0", match.GetPlayerGameScore(PlayerOrder.player1));
+            Assert.AreEqual("0", match.GetPlayerGameScore(PlayerOrder.player2));
+        }
+
+        /// <summary>
+        /// Unit test to check if the add points to player works
+        /// </summary>
+        public void AddPlayersPointsTest()
+        {
+            // arrange
+            var match = new Match("Player1 Name", "Player2 Name");
+
+            // act
+            match.AddPlayerPoint(PlayerOrder.player1); // Add one point to the player1
+
+            // assert
+            Assert.AreEqual("15", match.GetPlayerGameScore(PlayerOrder.player1));
             Assert.AreEqual("0", match.GetPlayerGameScore(PlayerOrder.player2));
         }
     }
