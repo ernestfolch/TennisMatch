@@ -37,7 +37,7 @@ namespace TennisMatchTests
         }
 
         /// <summary>
-        /// Auxiliar method to generate the defined game players scores
+        /// Auxiliar method to generate the desired game players scores
         /// </summary>
         /// <param name="match">Match instance</param>
         /// <param name="player1Points">Player1 points inside the game</param>
@@ -256,21 +256,61 @@ namespace TennisMatchTests
         }
 
         /// <summary>
+        /// Auxiliar method to generate the desired set players won games
+        /// </summary>
+        /// <param name="match">Match instance</param>
+        /// <param name="player1Sets">Player1 won games inside the set</param>
+        /// <param name="player2Sets">Player2 won games inside the set</param>
+        private void generateMatchWonSets(Match match, int player1Sets, int player2Sets)
+        {
+            var maxSetsValue = player1Sets > player2Sets ? player1Sets : player2Sets;
+
+            var i = 0;
+            while (i < maxSetsValue)
+            {
+                if (player1Sets - i > 0)
+                    for (var k = 0; k < 6; k++)
+                        GeneratePlayerWonGame(match, PlayerOrder.player1);
+                if (player2Sets - i > 0)
+                    for (var k = 0; k < 6; k++)
+                        GeneratePlayerWonGame(match, PlayerOrder.player2);
+
+                i++;
+            }
+        }
+
+        /// <summary>
         /// Unit test to check the match finish
         /// </summary>
-        [TestMethod]
-        public void PlayerWonMatchTest()
+        [DataRow(0, 0, false)]
+        [DataRow(0, 1, false)]
+        [DataRow(0, 2, false)]
+        [DataRow(1, 0, false)]
+        [DataRow(1, 1, false)]
+        [DataRow(1, 2, false)]
+        [DataRow(2, 0, false)]
+        [DataRow(2, 1, false)]
+        [DataRow(2, 2, false)]
+        [DataRow(0, 3, true)]
+        [DataRow(3, 0, true)]
+        [DataRow(3, 1, true)]
+        [DataRow(1, 3, true)]
+        [DataRow(2, 3, true)]
+        [DataRow(3, 2, true)]
+        [DataTestMethod]
+        public void PlayerWonMatchTest(int player1Sets, int player2Sets, bool result)
         {
             // arrange
             var match = new Match("Player1 Name", "Player2 Name");
 
             // act
-            for (var i = 0; i < 3; i++)
-                for (var k = 0; k < 6; k++)
-                    GeneratePlayerWonGame(match, PlayerOrder.player1);
+            generateMatchWonSets(match, player1Sets, player2Sets);
 
             // arrange
-            Assert.IsTrue(match.IsMatchFinished());
+            if (result)
+                Assert.IsTrue(match.IsMatchFinished());
+            else
+                Assert.IsFalse(match.IsMatchFinished());
         }
     }
 }

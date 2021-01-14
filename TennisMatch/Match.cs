@@ -122,5 +122,18 @@
             else
                 return Sets[setNumber].Player2Games;
         }
+
+        /// <summary>
+        /// Method to check if a match is finished or not
+        /// </summary>
+        /// <returns>Boolean indicating if the match is finished or not</returns>
+        public bool IsMatchFinished()
+        {
+            var matchBorder = (float)NumberOfSets / (float)2;
+            if (Player1Sets >= matchBorder || Player2Sets >= matchBorder)
+                return true;
+
+            return false;
+        }
     }
 }
