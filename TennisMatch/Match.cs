@@ -50,5 +50,20 @@
         {
             return CurrentGame.GetPlayerPoints(playerOrder);
         }
+
+        /// <summary>
+        /// Method to add one point to a player
+        /// </summary>
+        /// <param name="playerOrder">Player referred</param>
+        /// <returns>the referred player current score in the current game</returns>
+        public string AddPlayerPoint(PlayerOrder playerOrder)
+        {
+            if (playerOrder == PlayerOrder.player1)
+                CurrentGame.Player1Points++;
+            else
+                CurrentGame.Player2Points++;
+
+            return CurrentGame.GetPlayerPoints(playerOrder);
+        }
     }
 }

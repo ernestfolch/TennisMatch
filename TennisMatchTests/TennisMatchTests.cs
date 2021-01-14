@@ -39,6 +39,7 @@ namespace TennisMatchTests
         /// <summary>
         /// Unit test to check if the add points to player works
         /// </summary>
+        [TestMethod]
         public void AddPlayersPointsTest()
         {
             // arrange
