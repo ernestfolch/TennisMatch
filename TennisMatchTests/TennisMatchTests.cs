@@ -23,7 +23,7 @@ namespace TennisMatchTests
         }
 
         /// <summary>
-        /// Unit test to check if the game scores works as expected with tennis values
+        /// Unit test to check if the game scores starts with 0 points for each player
         /// </summary>
         [TestMethod]
         public void PlayersGameScoresTest()
@@ -100,7 +100,6 @@ namespace TennisMatchTests
         [DataRow(3, 2, PlayerOrder.player2, "deuce", "deuce")]
         [DataRow(3, 3, PlayerOrder.player2, "", "adv")]
         [DataTestMethod]
-
         public void AddPlayersPointsTest(int player1Points, int player2Points, PlayerOrder playerOrder, string resultPlayer1Points, string resultPlayer2Points)
         {
             // arrange
@@ -113,6 +112,20 @@ namespace TennisMatchTests
             // assert
             Assert.AreEqual(resultPlayer1Points, match.GetPlayerGameScore(PlayerOrder.player1));
             Assert.AreEqual(resultPlayer2Points, match.GetPlayerGameScore(PlayerOrder.player2));
+        }
+
+        /// <summary>
+        /// Unit test to check if the set start with 0 won games for each player
+        /// </summary>
+        [TestMethod]
+        public void PlayersSetScoresTest()
+        {
+            // arrange
+            var match = new Match("Player1 Name", "Player2 Name");
+
+            // assert
+            Assert.AreEqual(0, match.GetPlayerSetScore(PlayerOrder.player1, 1));
+            Assert.AreEqual(0, match.GetPlayerSetScore(PlayerOrder.player2, 1));
         }
     }
 }
