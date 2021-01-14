@@ -38,6 +38,17 @@
         /// <returns>String containing the tennis score for the referred player</returns>
         private string TranslateScore(int playerPoints, int opponentPoints)
         {
+            // players scores arrived to deuce (40-40)
+            if (playerPoints >= 3 && opponentPoints >= 3)
+            {
+                if (playerPoints == opponentPoints)
+                    return "deuce";
+                else if (playerPoints > opponentPoints)
+                    return "adv";
+                else
+                    return "";
+            }
+
             switch (playerPoints)
             {
                 case 3:
