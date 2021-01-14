@@ -37,20 +37,66 @@ namespace TennisMatchTests
         }
 
         /// <summary>
-        /// Unit test to check if the add points to player works
+        /// Auxiliar method to generate the defined game players scores
         /// </summary>
-        [TestMethod]
-        public void AddPlayersPointsTest()
+        /// <param name="match">Match instance</param>
+        /// <param name="player1Points">Player1 points inside the game</param>
+        /// <param name="player2Points">Player2 points inside the game</param>
+        private void generateMatchGamePoints(Match match, int player1Points, int player2Points)
+        {
+            var maxPointsValue = player1Points > player2Points ? player1Points : player2Points;
+
+            var i = 0;
+            while (i < maxPointsValue)
+            {
+                if (player1Points - i > 0)
+                    match.AddPlayerPoint(PlayerOrder.player1);
+                if (player2Points - i > 0)
+                    match.AddPlayerPoint(PlayerOrder.player2);
+
+                i++;
+            }
+        }
+
+        /// <summary>
+        /// Unit test to check if the player add points works
+        /// </summary>
+        /// <param name="player1Points">Player1 points inside the game</param>
+        /// <param name="player2Points">Player2 points inside the game</param>
+        /// <param name="playerOrder">Player referred</param>
+        /// <param name="playerPoint">Player who won the point</param>
+        /// <param name="resultPlayer1Points">Expected player1 points after the player point</param>
+        /// <param name="resultPlayer2Points">Expected player1 points after the player point</param> 
+        [DataRow(0, 0, PlayerOrder.player1, "15", "0")]
+        [DataRow(0, 1, PlayerOrder.player1, "15", "15")]
+        [DataRow(0, 2, PlayerOrder.player1, "15", "30")]
+        [DataRow(0, 3, PlayerOrder.player1, "15", "40")]
+        [DataRow(1, 0, PlayerOrder.player1, "30", "0")]
+        [DataRow(1, 1, PlayerOrder.player1, "30", "15")]
+        [DataRow(1, 2, PlayerOrder.player1, "30", "30")]
+        [DataRow(1, 3, PlayerOrder.player1, "30", "40")]
+        [DataRow(2, 0, PlayerOrder.player1, "40", "0")]
+        [DataRow(2, 1, PlayerOrder.player1, "40", "15")]
+        [DataRow(2, 2, PlayerOrder.player1, "40", "30")]
+        //[DataRow(2, 3, PlayerOrder.player1, "40", "40")]
+        [DataRow(3, 0, PlayerOrder.player1, "game", "0")]
+        [DataRow(3, 1, PlayerOrder.player1, "game", "15")]
+        [DataRow(3, 2, PlayerOrder.player1, "game", "30")]
+        //[DataRow(3, 3, PlayerOrder.player1, "game", "40")]
+        [DataTestMethod]
+
+        public void AddPlayersPointsTest(int player1Points, int player2Points, PlayerOrder playerOrder, string resultPlayer1Points, string resultPlayer2Points)
         {
             // arrange
             var match = new Match("Player1 Name", "Player2 Name");
 
             // act
-            match.AddPlayerPoint(PlayerOrder.player1); // Add one point to the player1
+            generateMatchGamePoints(match, player1Points, player2Points); // Generate a match with the requested current points
+            match.AddPlayerPoint(playerOrder); // Add one point to the player
 
             // assert
-            Assert.AreEqual("15", match.GetPlayerGameScore(PlayerOrder.player1));
-            Assert.AreEqual("0", match.GetPlayerGameScore(PlayerOrder.player2));
+            Assert.AreEqual(resultPlayer1Points, match.GetPlayerGameScore(PlayerOrder.player1));
+            Assert.AreEqual(resultPlayer2Points, match.GetPlayerGameScore(PlayerOrder.player2));
         }
     }
 }
