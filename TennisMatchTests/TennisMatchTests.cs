@@ -193,5 +193,66 @@ namespace TennisMatchTests
             Assert.AreEqual("2", match.GetPlayerGameScore(PlayerOrder.player1));
             Assert.AreEqual("1", match.GetPlayerGameScore(PlayerOrder.player2));
         }
+
+        /// <summary>
+        /// Unit test to check the scores inside a tie break
+        /// </summary>
+        [TestMethod]
+        public void TieBreakScoresTest()
+        {
+            // arrange
+            var match = new Match("Player1 Name", "Player2 Name");
+
+            // act
+            // generate a match at 6-6 sets
+            for (var i = 0; i < 6; i++)
+            {
+                GeneratePlayerWonGame(match, PlayerOrder.player1);
+                GeneratePlayerWonGame(match, PlayerOrder.player2);
+            }
+
+            // add player1 6 points
+            for (var i = 0; i < 6; i++)
+                match.AddPlayerPoint(PlayerOrder.player1);
+
+            // arrange
+            Assert.AreEqual("6", match.GetPlayerGameScore(PlayerOrder.player1));
+            Assert.AreEqual("0", match.GetPlayerGameScore(PlayerOrder.player2));
+        }
+
+        /// <summary>
+        /// Unit test to check that the tie break is properly finished when 6-6
+        /// </summary>
+        [TestMethod]
+        public void TieBreakFinishedByTwoPointsTest()
+        {
+            // arrange
+            var match = new Match("Player1 Name", "Player2 Name");
+
+            // act
+            // generate a match at 6-6 sets
+            for (var i = 0; i < 6; i++)
+            {
+                GeneratePlayerWonGame(match, PlayerOrder.player1);
+                GeneratePlayerWonGame(match, PlayerOrder.player2);
+            }
+
+            // add player2 5 points
+            for (var i = 0; i < 5; i++)
+                match.AddPlayerPoint(PlayerOrder.player2);
+
+            // add player1 5 points
+            for (var i = 0; i < 5; i++)
+                match.AddPlayerPoint(PlayerOrder.player1);
+
+            // to generate the 7-6
+            match.AddPlayerPoint(PlayerOrder.player1);
+            match.AddPlayerPoint(PlayerOrder.player2);
+            match.AddPlayerPoint(PlayerOrder.player1);
+
+            // arrange
+            Assert.AreEqual("7", match.GetPlayerGameScore(PlayerOrder.player1));
+            Assert.AreEqual("6", match.GetPlayerGameScore(PlayerOrder.player2));
+        }
     }
 }
