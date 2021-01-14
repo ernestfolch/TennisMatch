@@ -254,5 +254,23 @@ namespace TennisMatchTests
             Assert.AreEqual("7", match.GetPlayerGameScore(PlayerOrder.player1));
             Assert.AreEqual("6", match.GetPlayerGameScore(PlayerOrder.player2));
         }
+
+        /// <summary>
+        /// Unit test to check the match finish
+        /// </summary>
+        [TestMethod]
+        public void PlayerWonMatchTest()
+        {
+            // arrange
+            var match = new Match("Player1 Name", "Player2 Name");
+
+            // act
+            for (var i = 0; i < 3; i++)
+                for (var k = 0; k < 6; k++)
+                    GeneratePlayerWonGame(match, PlayerOrder.player1);
+
+            // arrange
+            Assert.IsTrue(match.IsMatchFinished());
+        }
     }
 }
