@@ -7,6 +7,7 @@
     {
         public int Player1Games { get; set; }
         public int Player2Games { get; set; }
+        public bool IsFinished { get; set; }
 
         /// <summary>
         /// Class constructor
@@ -15,6 +16,8 @@
         {
             Player1Games = 0;
             Player2Games = 0;
+
+            IsFinished = false;
         }
 
         /// <summary>
@@ -27,6 +30,10 @@
                 Player1Games++;
             else
                 Player2Games++;
+
+            if ((Player1Games == 6 && Player2Games < 5) ||
+                (Player2Games == 6 && Player1Games < 5))
+                IsFinished = true;
         }
     }
 }

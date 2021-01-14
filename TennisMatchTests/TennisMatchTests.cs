@@ -142,6 +142,9 @@ namespace TennisMatchTests
                 match.AddPlayerPoint(player);
         }
 
+        /// <summary>
+        /// Unit test to check games won inside the sets
+        /// </summary>
         [TestMethod]
         public void PlayerWonGamesTest()
         {
