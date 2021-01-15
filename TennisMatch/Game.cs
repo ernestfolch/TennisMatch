@@ -7,11 +7,30 @@ namespace TennisMatch
     /// </summary>
     internal class Game
     {
-        public int Player1Points { get; set; }
-        public int Player2Points { get; set; }
-        public bool IsFinished { get; set; }
+        #region properties
+        /// <summary>
+        /// Gets or sets the player1 points
+        /// </summary>
+        /// <value>The player1 points</value>
+        internal int Player1Points { get; set; }
+        /// <summary>
+        /// Gets or sets the player2 points
+        /// </summary>
+        /// <value>The player2 points</value>
+        internal int Player2Points { get; set; }
+        /// <summary>
+        /// Gets or sets a value indicating whether this game is finished.
+        /// </summary>
+        /// <value><c>true</c> if this game is finished; otherwise, <c>false</c>.</value>
+        internal bool IsFinished { get; set; }
+        /// <summary>
+        /// Gets or sets a value indicating whether this instance is tie break.
+        /// </summary>
+        /// <value><c>true</c> if this instance is tie break; otherwise, <c>false</c>.</value>
         private bool IsTieBreak { get; set; }
+        #endregion
 
+        #region constructor
         /// <summary>
         /// Class constructor
         /// </summary>
@@ -24,7 +43,9 @@ namespace TennisMatch
             IsFinished = false;
             IsTieBreak = isTieBreak;
         }
+        #endregion
 
+        #region methods
         /// <summary>
         /// Method to get the tennis score for the referred player
         /// </summary>
@@ -88,5 +109,6 @@ namespace TennisMatch
                         return "";
             }
         }
+        #endregion
     }
 }

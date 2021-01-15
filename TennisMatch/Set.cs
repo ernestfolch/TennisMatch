@@ -5,10 +5,25 @@
     /// </summary>
     internal class Set
     {
-        public int Player1Games { get; set; }
-        public int Player2Games { get; set; }
-        public bool IsFinished { get; set; }
+        #region properties        
+        /// <summary>
+        /// Gets or sets the player1 won games
+        /// </summary>
+        /// <value>The player1 won games</value>
+        internal int Player1Games { get; set; }
+        /// <summary>
+        /// Gets or sets the player2 won games
+        /// </summary>
+        /// <value>The player2 won games</value>
+        internal int Player2Games { get; set; }
+        /// <summary>
+        /// Gets or sets a value indicating whether this set is finished.
+        /// </summary>
+        /// <value><c>true</c> if this set is finished; otherwise, <c>false</c>.</value>
+        internal bool IsFinished { get; set; }
+        #endregion
 
+        #region constructor
         /// <summary>
         /// Class constructor
         /// </summary>
@@ -19,7 +34,9 @@
 
             IsFinished = false;
         }
+        #endregion
 
+        #region methods
         /// <summary>
         /// Method to add on won game to the player
         /// </summary>
@@ -38,5 +55,6 @@
             if (Player1Games == 7 || Player2Games == 7) // tie break
                 IsFinished = true;
         }
+        #endregion
     }
 }

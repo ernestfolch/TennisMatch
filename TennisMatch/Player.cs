@@ -5,8 +5,15 @@
     /// </summary>
     internal class Player
     {
-        public string Name { get; set; }
+        #region properties        
+        /// <summary>
+        /// Gets or sets the player name
+        /// </summary>
+        /// <value>The player name</value>
+        internal string Name { get; set; }
+        #endregion
 
+        #region constructor
         /// <summary>
         /// Class constructor
         /// </summary>
@@ -15,5 +22,6 @@
         {
             Name = name;
         }
+        #endregion
     }
 }

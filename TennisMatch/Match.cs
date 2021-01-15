@@ -5,22 +5,67 @@
     /// </summary>
     public enum PlayerOrder
     {
+        /// <summary>
+        /// The match player1
+        /// </summary>
         player1,
+        /// <summary>
+        /// The match player2
+        /// </summary>
         player2
     }
 
+    /// <summary>
+    /// Public class to manage a tennis match between two players
+    /// </summary>
     public class Match
     {
+        #region fields        
+        /// <summary>
+        /// The number of sets defined in a match
+        /// </summary>
         private const int NumberOfSets = 5;
+        #endregion
 
+        #region properties        
+        /// <summary>
+        /// Gets or sets the player1
+        /// </summary>
+        /// <value>The player1</value>
         private Player Player1 { get; set; }
+        /// <summary>
+        /// Gets or sets the player2
+        /// </summary>
+        /// <value>The player2</value>
         private Player Player2 { get; set; }
+        /// <summary>
+        /// Gets or sets the current tennis game
+        /// </summary>
+        /// <value>The current tennis game</value>
         private Game CurrentGame { get; set; }
+        /// <summary>
+        /// Gets or sets the number of sets in a match
+        /// </summary>
+        /// <value>The sets defined in a match</value>
         private Set[] Sets { get; set; } = new Set[NumberOfSets];
+        /// <summary>
+        /// Gets or sets the current tennis set
+        /// </summary>
+        /// <value>The current tennis set</value>
         private int CurrentSet { get; set; }
+        /// <summary>
+        /// Gets or sets the won player1 sets
+        /// </summary>
+        /// <value>The player1 won sets</value>
         private int Player1Sets { get; set; }
+        /// <summary>
+        /// Gets or sets the won player2 sets
+        /// </summary>
+        /// <value>The player2 won sets</value>
         private int Player2Sets { get; set; }
+        #endregion
 
+        #region constructor
         /// <summary>
         /// Class constructor
         /// </summary>
@@ -37,7 +82,9 @@
 
             CurrentGame = StartNewGame();
         }
+        #endregion
 
+        #region methods
         /// <summary>
         /// Auxiliar method to create new game deciding if it is a tie break or not
         /// </summary>
@@ -135,5 +182,6 @@
 
             return false;
         }
+        #endregion
     }
 }
