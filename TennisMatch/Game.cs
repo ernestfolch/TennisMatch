@@ -70,6 +70,7 @@ namespace TennisMatch
             // the current game is a tie break game
             if (IsTieBreak)
             {
+                // check if tie break is finished
                 if ((playerPoints >= 6 || opponentPoints >= 6) &&
                     Math.Abs(playerPoints - opponentPoints) >= 2)
                     IsFinished = true;
@@ -80,26 +81,17 @@ namespace TennisMatch
             // players scores arrived to deuce (40-40)
             if (playerPoints >= 3 && opponentPoints >= 3)
             {
-                if ((playerPoints >= 5) &&
+                // check if the game is finished
+                if ((playerPoints >= 5 || opponentPoints >= 5) &&
                     Math.Abs(playerPoints - opponentPoints) >= 2)
                 {
                     IsFinished = true;
-                    return "game";
+                    return (playerPoints > opponentPoints) ? "game" : "0";
                 }
 
-                if ((opponentPoints >= 5) &&
-                    Math.Abs(playerPoints - opponentPoints) >= 2)
-                {
-                    IsFinished = true;
-                    return "0";
-                }
-
-                if (playerPoints == opponentPoints)
-                    return "deuce";
-                else if (playerPoints > opponentPoints)
-                    return "adv";
-                else
-                    return "";
+                return (playerPoints == opponentPoints) 
+                    ? "deuce" 
+                    : (playerPoints > opponentPoints) ? "adv" : "";
             }
 
             // normal game points
@@ -114,13 +106,8 @@ namespace TennisMatch
                 case 0:
                     return "0"; // love
                 default:
-                    if (playerPoints > opponentPoints)
-                    {
-                        IsFinished = true;
-                        return "game";
-                    }
-                    else
-                        return "";
+                    IsFinished = true;
+                    return "game";
             }
         }
         #endregion
