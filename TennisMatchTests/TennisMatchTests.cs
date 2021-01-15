@@ -83,6 +83,7 @@ namespace TennisMatchTests
         [DataRow(3, 1, PlayerOrder.player1, "game", "15")]
         [DataRow(3, 2, PlayerOrder.player1, "game", "30")]
         [DataRow(3, 3, PlayerOrder.player1, "adv", "")]
+        [DataRow(4, 3, PlayerOrder.player1, "game", "0")]
         [DataRow(0, 0, PlayerOrder.player2, "0", "15")]
         [DataRow(0, 1, PlayerOrder.player2, "0", "30")]
         [DataRow(0, 2, PlayerOrder.player2, "0", "40")]
@@ -99,6 +100,7 @@ namespace TennisMatchTests
         [DataRow(3, 1, PlayerOrder.player2, "40", "30")]
         [DataRow(3, 2, PlayerOrder.player2, "deuce", "deuce")]
         [DataRow(3, 3, PlayerOrder.player2, "", "adv")]
+        [DataRow(3, 4, PlayerOrder.player2, "0", "game")]
         [DataTestMethod]
         public void AddPlayersPointsTest(int player1Points, int player2Points, PlayerOrder playerPointWinner, string resultPlayer1Points, string resultPlayer2Points)
         {
