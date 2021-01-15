@@ -80,6 +80,20 @@ namespace TennisMatch
             // players scores arrived to deuce (40-40)
             if (playerPoints >= 3 && opponentPoints >= 3)
             {
+                if ((playerPoints >= 5) &&
+                    Math.Abs(playerPoints - opponentPoints) >= 2)
+                {
+                    IsFinished = true;
+                    return "game";
+                }
+
+                if ((opponentPoints >= 5) &&
+                    Math.Abs(playerPoints - opponentPoints) >= 2)
+                {
+                    IsFinished = true;
+                    return "0";
+                }
+
                 if (playerPoints == opponentPoints)
                     return "deuce";
                 else if (playerPoints > opponentPoints)
