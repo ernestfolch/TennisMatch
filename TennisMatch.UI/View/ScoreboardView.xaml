@@ -22,15 +22,15 @@
         <Label HorizontalAlignment="Left" Height="30" Margin="150,70,0,0" Content="{Binding SessionContext.Player1Name}" VerticalAlignment="Top" Width="120"/>
         <Label HorizontalAlignment="Left" Height="30" Margin="150,95,0,0" Content="{Binding SessionContext.Player2Name}" VerticalAlignment="Top" Width="120"/>
 
-        <Label HorizontalAlignment="Left" Height="30" Margin="400,70,0,0" Content="0" VerticalAlignment="Top" Width="30"/>
-        <Label HorizontalAlignment="Left" Height="30" Margin="400,95,0,0" Content="0" VerticalAlignment="Top" Width="30"/>
-        <Label HorizontalAlignment="Left" Height="30" Margin="425,70,0,0" Content="0" VerticalAlignment="Top" Width="30"/>
-        <Label HorizontalAlignment="Left" Height="30" Margin="425,95,0,0" Content="0" VerticalAlignment="Top" Width="30"/>
-        <Label HorizontalAlignment="Left" Height="30" Margin="450,70,0,0" Content="0" VerticalAlignment="Top" Width="30"/>
-        <Label HorizontalAlignment="Left" Height="30" Margin="450,95,0,0" Content="0" VerticalAlignment="Top" Width="30"/>
-        <Label HorizontalAlignment="Left" Height="30" Margin="475,70,0,0" Content="0" VerticalAlignment="Top" Width="30"/>
-        <Label HorizontalAlignment="Left" Height="30" Margin="475,95,0,0" Content="0" VerticalAlignment="Top" Width="30"/>
-        <Label HorizontalAlignment="Left" Height="30" Margin="500,70,0,0" Content="0" VerticalAlignment="Top" Width="30"/>
-        <Label HorizontalAlignment="Left" Height="30" Margin="500,95,0,0" Content="0" VerticalAlignment="Top" Width="30"/>
+        <Label HorizontalAlignment="Left" Height="30" Margin="400,70,0,0" Content="{Binding SessionContext.Player1WonGamesSet1}" VerticalAlignment="Top" Width="30"/>
+        <Label HorizontalAlignment="Left" Height="30" Margin="400,95,0,0" Content="{Binding SessionContext.Player2WonGamesSet1}" VerticalAlignment="Top" Width="30"/>
+        <Label HorizontalAlignment="Left" Height="30" Margin="425,70,0,0" Content="{Binding SessionContext.Player1WonGamesSet2}" VerticalAlignment="Top" Width="30"/>
+        <Label HorizontalAlignment="Left" Height="30" Margin="425,95,0,0" Content="{Binding SessionContext.Player2WonGamesSet2}" VerticalAlignment="Top" Width="30"/>
+        <Label HorizontalAlignment="Left" Height="30" Margin="450,70,0,0" Content="{Binding SessionContext.Player1WonGamesSet3}" VerticalAlignment="Top" Width="30"/>
+        <Label HorizontalAlignment="Left" Height="30" Margin="450,95,0,0" Content="{Binding SessionContext.Player2WonGamesSet3}" VerticalAlignment="Top" Width="30"/>
+        <Label HorizontalAlignment="Left" Height="30" Margin="475,70,0,0" Content="{Binding SessionContext.Player1WonGamesSet4}" VerticalAlignment="Top" Width="30"/>
+        <Label HorizontalAlignment="Left" Height="30" Margin="475,95,0,0" Content="{Binding SessionContext.Player2WonGamesSet4}" VerticalAlignment="Top" Width="30"/>
+        <Label HorizontalAlignment="Left" Height="30" Margin="500,70,0,0" Content="{Binding SessionContext.Player1WonGamesSet5}" VerticalAlignment="Top" Width="30"/>
+        <Label HorizontalAlignment="Left" Height="30" Margin="500,95,0,0" Content="{Binding SessionContext.Player2WonGamesSet5}" VerticalAlignment="Top" Width="30"/>
     </Grid>
 </Window>
