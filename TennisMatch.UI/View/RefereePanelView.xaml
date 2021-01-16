@@ -5,16 +5,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TennisMatch.UI.View"
         mc:Ignorable="d"
-        Title="Referee Panel" Height="150" Width="450" Left="200" Top="300">
+        Title="Referee Panel" Height="180" Width="450" Left="200" Top="300">
     <Grid>
         <Label Content="Player 1:" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Margin="30,25,0,0" Width="60"></Label>
         <Label Content="Player 2:" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Margin="30,65,0,0" Width="60"></Label>
+        <Label Content="Information:" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Margin="30,105,0,0" Width="80"></Label>
 
         <TextBox Text="{Binding SessionContext.Player1Name}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="23" Margin="90,25,0,0" Width="120" />
         <TextBox Text="{Binding SessionContext.Player2Name}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="23" Margin="90,65,0,0" Width="120" />
-
+        <TextBlock Text="{Binding SessionContext.RefereeInfo}" HorizontalAlignment="Left" Margin="110,110,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="290"/>
+        
         <Button Content="Add Point" HorizontalAlignment="Left" Margin="230,27,0,0" VerticalAlignment="Top" Width="75" Command="{Binding AddPointCommand}" CommandParameter="Player1"/>
         <Button Content="Add Point" HorizontalAlignment="Left" Margin="230,67,0,0" VerticalAlignment="Top" Width="75" Command="{Binding AddPointCommand}" CommandParameter="Player2"/>
         <Button Content="Start Match" HorizontalAlignment="Left" Margin="340,67,0,0" VerticalAlignment="Top" Width="75" Command="{Binding StartMatchCommand}"/>
+
     </Grid>
 </Window>

@@ -5,13 +5,27 @@ namespace TennisMatch.UI.Model
 {
     public class SessionContext : INotifyPropertyChanged
     {
+        #region properties
         /// <summary>
         /// Gets or sets the shared tennis match object
         /// </summary>
         /// <value>The shared tennis match shared</value>
         private Match Match { get; set; }
+        private string _refereeInfo;
+        public string RefereeInfo
+        {
+            get
+            {
+                return _refereeInfo;
+            }
+            set
+            {
+                _refereeInfo = value;
+                OnPropertyChanged("RefereeInfo");
+            }
+        }
 
-        #region Player1 properties
+        #region Player1
         private string _player1Name;
         public string Player1Name
         {
@@ -25,11 +39,17 @@ namespace TennisMatch.UI.Model
                 OnPropertyChanged("Player1Name");
             }
         }
+        private string _player1GameScore;
         public string Player1GameScore
         {
             get
             {
-                return (Match != null) ? Match.GetPlayerGameScore(PlayerOrder.player1) : "0";
+                return _player1GameScore;
+            }
+            set
+            {
+                _player1GameScore = value;
+                OnPropertyChanged("Player1GameScore");
             }
         }
         private int _player1WonGamesSet1;
@@ -99,7 +119,7 @@ namespace TennisMatch.UI.Model
         }
         #endregion
 
-        #region Player2 properties
+        #region Player2
         private string _player2Name;
         public string Player2Name
         {
@@ -113,11 +133,17 @@ namespace TennisMatch.UI.Model
                 OnPropertyChanged("Player2Name");
             }
         }
+        private string _player2GameScore;
         public string Player2GameScore
         {
             get
             {
-                return (Match != null) ? Match.GetPlayerGameScore(PlayerOrder.player2) : "0";
+                return _player2GameScore;
+            }
+            set
+            {
+                _player2GameScore = value;
+                OnPropertyChanged("Player2GameScore");
             }
         }
         private int _player2WonGamesSet1;
@@ -186,6 +212,7 @@ namespace TennisMatch.UI.Model
             }
         }
         #endregion
+        #endregion
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -200,7 +227,30 @@ namespace TennisMatch.UI.Model
         public void StartMatch()
         {
             if (!string.IsNullOrEmpty(Player1Name) && !string.IsNullOrEmpty(Player2Name))
+            {
+                bool restartMatch = (Match == null) ? false : true;
+
                 Match = new Match(Player1Name, Player2Name);
+                Player1GameScore = "0";
+                Player2GameScore = "0";
+
+                if (restartMatch) // new match started, update view with 0 points
+                {
+                    Player1WonGamesSet1 = 0;
+                    Player1WonGamesSet2 = 0;
+                    Player1WonGamesSet3 = 0;
+                    Player1WonGamesSet4 = 0;
+                    Player1WonGamesSet5 = 0;
+                    Player2WonGamesSet1 = 0;
+                    Player2WonGamesSet2 = 0;
+                    Player2WonGamesSet3 = 0;
+                    Player2WonGamesSet4 = 0;
+                    Player2WonGamesSet5 = 0;
+                }
+                RefereeInfo = "Match Started!";
+            }
+            else
+                RefereeInfo = "You need to define the players names";
         }
 
         /// <summary>
@@ -212,43 +262,92 @@ namespace TennisMatch.UI.Model
             if (Match != null)
             {
                 if (player == "Player1")
+                {
                     Match.AddPlayerPoint(PlayerOrder.player1);
+                    RefereeInfo = "Player1 won the POINT";
+                }
                 else
+                {
                     Match.AddPlayerPoint(PlayerOrder.player2);
+                    RefereeInfo = "Player2 won the POINT";
+                }
 
-                OnPropertyChanged("Player1GameScore");
-                OnPropertyChanged("Player2GameScore");
+                // update the view with the new player scores
+                Player1GameScore = Match.GetPlayerGameScore(PlayerOrder.player1);
+                Player2GameScore = Match.GetPlayerGameScore(PlayerOrder.player2);
 
                 UpdateWonGames(); // if needed, update the view with the won games
+
+                if (Match.IsMatchFinished())
+                    RefereeInfo = "Match finished!";
             }
+            else
+                RefereeInfo = "You need to start the match first";
         }
 
+        /// <summary>
+        /// Auxiliar method to update the won games inside the sets only if it is needed
+        /// </summary>
         private void UpdateWonGames()
         {
+            var winner = string.Empty;
+
             if (Player1WonGamesSet1 != Match.GetPlayerSetScore(PlayerOrder.player1, 0))
+            {
                 Player1WonGamesSet1 = Match.GetPlayerSetScore(PlayerOrder.player1, 0);
-            if (Player2WonGamesSet1 != Match.GetPlayerSetScore(PlayerOrder.player2, 0))
+                winner = "Player1";
+            }
+            else if (Player2WonGamesSet1 != Match.GetPlayerSetScore(PlayerOrder.player2, 0))
+            {
                 Player2WonGamesSet1 = Match.GetPlayerSetScore(PlayerOrder.player2, 0);
-
-            if (Player1WonGamesSet2 != Match.GetPlayerSetScore(PlayerOrder.player1, 1))
+                winner = "Player2";
+            }
+            else if (Player1WonGamesSet2 != Match.GetPlayerSetScore(PlayerOrder.player1, 1))
+            {
                 Player1WonGamesSet2 = Match.GetPlayerSetScore(PlayerOrder.player1, 1);
-            if (Player2WonGamesSet2 != Match.GetPlayerSetScore(PlayerOrder.player2, 1))
+                winner = "Player1";
+            }
+            else if (Player2WonGamesSet2 != Match.GetPlayerSetScore(PlayerOrder.player2, 1))
+            {
                 Player2WonGamesSet2 = Match.GetPlayerSetScore(PlayerOrder.player2, 1);
-
-            if (Player1WonGamesSet3 != Match.GetPlayerSetScore(PlayerOrder.player1, 2))
+                winner = "Player2";
+            }
+            else if (Player1WonGamesSet3 != Match.GetPlayerSetScore(PlayerOrder.player1, 2))
+            {
                 Player1WonGamesSet3 = Match.GetPlayerSetScore(PlayerOrder.player1, 2);
-            if (Player2WonGamesSet3 != Match.GetPlayerSetScore(PlayerOrder.player2, 2))
+                winner = "Player1";
+            }
+            else if (Player2WonGamesSet3 != Match.GetPlayerSetScore(PlayerOrder.player2, 2))
+            {
                 Player2WonGamesSet3 = Match.GetPlayerSetScore(PlayerOrder.player2, 2);
-
-            if (Player1WonGamesSet4 != Match.GetPlayerSetScore(PlayerOrder.player1, 3))
+                winner = "Player2";
+            }
+            else if (Player1WonGamesSet4 != Match.GetPlayerSetScore(PlayerOrder.player1, 3))
+            {
                 Player1WonGamesSet4 = Match.GetPlayerSetScore(PlayerOrder.player1, 3);
-            if (Player2WonGamesSet4 != Match.GetPlayerSetScore(PlayerOrder.player2, 3))
+                winner = "Player1";
+            }
+            else if (Player2WonGamesSet4 != Match.GetPlayerSetScore(PlayerOrder.player2, 3))
+            {
                 Player2WonGamesSet4 = Match.GetPlayerSetScore(PlayerOrder.player2, 3);
-
-            if (Player1WonGamesSet5 != Match.GetPlayerSetScore(PlayerOrder.player1, 4))
+                winner = "Player2";
+            }
+            else if (Player1WonGamesSet5 != Match.GetPlayerSetScore(PlayerOrder.player1, 4))
+            {
                 Player1WonGamesSet5 = Match.GetPlayerSetScore(PlayerOrder.player1, 4);
-            if (Player2WonGamesSet5 != Match.GetPlayerSetScore(PlayerOrder.player2, 4))
+                winner = "Player1";
+            }
+            else if (Player2WonGamesSet5 != Match.GetPlayerSetScore(PlayerOrder.player2, 4))
+            {
                 Player2WonGamesSet5 = Match.GetPlayerSetScore(PlayerOrder.player2, 4);
+                winner = "Player2";
+            }
+
+            if (Match.IsGameFinished())
+                RefereeInfo = winner + " won the GAME";
+
+            if (Match.IsSetFinished())
+                RefereeInfo = winner + " won the SET";
         }
     }
 }
