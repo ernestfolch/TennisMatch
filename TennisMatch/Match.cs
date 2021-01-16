@@ -185,6 +185,25 @@
 
             return false;
         }
+
+        public bool IsGameFinished()
+        {
+            return CurrentGame.IsFinished;
+        }
+
+        public bool IsSetFinished()
+        {
+            if (CurrentSet == 0)
+                return false;
+
+            if (Sets[CurrentSet - 1].IsFinished &&
+                Sets[CurrentSet].Player1Games == 0 &&
+                Sets[CurrentSet].Player2Games == 0 &&
+                CurrentGame.IsFinished)
+                return true;
+
+            return false;
+        }
         #endregion
     }
 }

@@ -162,7 +162,10 @@ namespace TennisMatchTests
 
                     Assert.AreEqual(j + 1, match.GetPlayerSetScore(PlayerOrder.player1, i));
                     Assert.AreEqual(0, match.GetPlayerSetScore(PlayerOrder.player2, i));
+                    Assert.IsTrue(match.IsGameFinished());
                 }
+
+                Assert.IsTrue(match.IsSetFinished());
             }
         }
 
