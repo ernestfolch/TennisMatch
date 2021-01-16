@@ -13,8 +13,8 @@
         <TextBox Text="{Binding SessionContext.Player1Name}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="23" Margin="90,25,0,0" Width="120" />
         <TextBox Text="{Binding SessionContext.Player2Name}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="23" Margin="90,65,0,0" Width="120" />
 
-        <Button Content="Add Point" HorizontalAlignment="Left" Margin="230,27,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button Content="Add Point" HorizontalAlignment="Left" Margin="230,67,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button Content="Start Match" HorizontalAlignment="Left" Margin="340,67,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Content="Add Point" HorizontalAlignment="Left" Margin="230,27,0,0" VerticalAlignment="Top" Width="75" Command="{Binding AddPointCommand}" CommandParameter="Player1"/>
+        <Button Content="Add Point" HorizontalAlignment="Left" Margin="230,67,0,0" VerticalAlignment="Top" Width="75" Command="{Binding AddPointCommand}" CommandParameter="Player2"/>
+        <Button Content="Start Match" HorizontalAlignment="Left" Margin="340,67,0,0" VerticalAlignment="Top" Width="75" Command="{Binding StartMatchCommand}"/>
     </Grid>
 </Window>

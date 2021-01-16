@@ -59,6 +59,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Command\DelegateCommand.cs" />
     <Compile Include="Model\SessionContext.cs" />
     <Compile Include="ViewModel\RefereePanelViewModel.cs" />
     <Compile Include="ViewModel\ScoreboardViewModel.cs" />
