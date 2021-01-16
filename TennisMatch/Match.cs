@@ -129,6 +129,9 @@
         /// <returns>String with the referred player current score in the current game</returns>
         public string AddPlayerPoint(PlayerOrder playerOrder)
         {
+            if (IsMatchFinished())
+                return string.Empty;
+
             if (CurrentGame.IsFinished)
                 CurrentGame = StartNewGame();
 

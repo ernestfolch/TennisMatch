@@ -154,7 +154,7 @@ namespace TennisMatchTests
             var match = new Match("Player1 Name", "Player2 Name");
 
             // act & assert
-            for (var i = 0; i < 5; i++) // set iterations 
+            for (var i = 0; i < 3; i++) // set iterations 
             {
                 for (var j = 0; j < 6; j++) // games iterations 
                 {
