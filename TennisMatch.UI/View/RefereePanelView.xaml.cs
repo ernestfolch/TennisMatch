@@ -1,4 +1,6 @@
 ﻿using System.Windows;
+using TennisMatch.UI.Model;
+using TennisMatch.UI.ViewModel;
 
 namespace TennisMatch.UI.View
 {
@@ -7,9 +9,12 @@ namespace TennisMatch.UI.View
     /// </summary>
     public partial class RefereePanelView : Window
     {
-        public RefereePanelView()
+        public RefereePanelView(SessionContext sessionContext)
         {
             InitializeComponent();
+
+            var refereePanelViewModel = new RefereePanelViewModel(sessionContext);
+            DataContext = refereePanelViewModel;
         }
     }
 }

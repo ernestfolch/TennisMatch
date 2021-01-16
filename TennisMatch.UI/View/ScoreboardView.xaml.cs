@@ -1,4 +1,6 @@
 ﻿using System.Windows;
+using TennisMatch.UI.Model;
+using TennisMatch.UI.ViewModel;
 
 namespace TennisMatch.UI.View
 {
@@ -7,9 +9,12 @@ namespace TennisMatch.UI.View
     /// </summary>
     public partial class ScoreboardView : Window
     {
-        public ScoreboardView()
+        public ScoreboardView(SessionContext sessionContext)
         {
             InitializeComponent();
+
+            var scoreboardViewModel = new ScoreboardViewModel(sessionContext);
+            DataContext = scoreboardViewModel;
         }
     }
 }

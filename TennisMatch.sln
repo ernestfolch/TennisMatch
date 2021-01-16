@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TennisMatch", "TennisMatch\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TennisMatchTests", "TennisMatchTests\TennisMatchTests.csproj", "{D399C9A6-0B6F-40C1-BB28-D5F456C150C7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TennisMatch.UI", "TennisMatch.UI\TennisMatch.UI.csproj", "{2793054B-BBF9-458C-B545-6B3C8F651288}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{D399C9A6-0B6F-40C1-BB28-D5F456C150C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D399C9A6-0B6F-40C1-BB28-D5F456C150C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D399C9A6-0B6F-40C1-BB28-D5F456C150C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2793054B-BBF9-458C-B545-6B3C8F651288}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2793054B-BBF9-458C-B545-6B3C8F651288}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2793054B-BBF9-458C-B545-6B3C8F651288}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2793054B-BBF9-458C-B545-6B3C8F651288}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
