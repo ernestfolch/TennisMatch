@@ -19,12 +19,12 @@ namespace TennisMatch.UI.ViewModel
             AddPointCommand = new DelegateCommand(new Action<object>(AddPlayerPoint));
         }
 
-        private void StartMatch(object obj)
+        public void StartMatch(object obj)
         {
             SessionContext.StartMatch();
         }
 
-        private void AddPlayerPoint(object obj)
+        public void AddPlayerPoint(object obj)
         {
             SessionContext.AddPoint(obj.ToString());
         }

@@ -204,6 +204,9 @@
             if (CurrentSet == 0)
                 return false;
 
+            if (CurrentSet == NumberOfSets)
+                return true;
+
             if (Sets[CurrentSet - 1].IsFinished &&
                 Sets[CurrentSet].Player1Games == 0 &&
                 Sets[CurrentSet].Player2Games == 0 &&

@@ -6,11 +6,7 @@ namespace TennisMatch.UI.Model
     public class SessionContext : INotifyPropertyChanged
     {
         #region properties
-        /// <summary>
-        /// Gets or sets the shared tennis match object
-        /// </summary>
-        /// <value>The shared tennis match shared</value>
-        private Match Match { get; set; }
+        public Match Match { get; set; }
         private string _refereeInfo;
         public string RefereeInfo
         {
@@ -284,9 +280,12 @@ namespace TennisMatch.UI.Model
                 UpdatePlayerServer();
 
                 if (restartMatch) // new match started, update view with 0 points
+                {
                     InitializeMatch();
-
-                RefereeInfo = "Match Started!";
+                    RefereeInfo = "Match Restarted!";
+                }
+                else
+                    RefereeInfo = "Match Started!";
             }
             else
                 RefereeInfo = "You need to define the players names";
