@@ -219,7 +219,7 @@
         /// <summary>
         /// Method to get the current game player server
         /// </summary>
-        /// <returns></returns>
+        /// <returns>PlayerOrder indicating who is the player server of the current game</returns>
         public PlayerOrder GetPlayerServer()
         {
             return CurrentGame.PlayerServer;
