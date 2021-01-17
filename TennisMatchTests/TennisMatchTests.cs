@@ -327,6 +327,11 @@ namespace TennisMatchTests
             // arrange
             var match = new Match("Player1 Name", "Player2 Name");
 
+            // act
+            GeneratePlayerWonGame(match, PlayerOrder.player1);
+            GeneratePlayerWonGame(match, PlayerOrder.player1);
+            match.AddPlayerPoint(PlayerOrder.player2);
+
             // assert
             Assert.AreEqual(PlayerOrder.player1, match.GetPlayerServer());
         }
