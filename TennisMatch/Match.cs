@@ -96,7 +96,7 @@
                 Sets[CurrentSet].Player2Games == 6)
                 isTieBreak = true;
 
-            return new Game(isTieBreak);
+            return new Game(isTieBreak, CurrentGame?.PlayerServer);
         }
 
         /// <summary>
@@ -186,11 +186,19 @@
             return false;
         }
 
+        /// <summary>
+        /// Method to check if a game is finished or not
+        /// </summary>
+        /// <returns>Boolean indicating if the game is finished or not</returns>
         public bool IsGameFinished()
         {
             return CurrentGame.IsFinished;
         }
 
+        /// <summary>
+        /// Method to check if a set is finished or not
+        /// </summary>
+        /// <returns>Boolean indicating if the set is finished or not</returns>
         public bool IsSetFinished()
         {
             if (CurrentSet == 0)
@@ -203,6 +211,15 @@
                 return true;
 
             return false;
+        }
+
+        /// <summary>
+        /// Method to get the current game player server
+        /// </summary>
+        /// <returns></returns>
+        public PlayerOrder GetPlayerServer()
+        {
+            return CurrentGame.PlayerServer;
         }
         #endregion
     }

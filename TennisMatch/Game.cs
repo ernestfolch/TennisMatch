@@ -28,6 +28,11 @@ namespace TennisMatch
         /// </summary>
         /// <value><c>true</c> if this instance is tie break; otherwise, <c>false</c>.</value>
         private bool IsTieBreak { get; set; }
+        /// <summary>
+        /// Gets or sets the player server for the game
+        /// </summary>
+        /// <value>The game player server</value>
+        internal PlayerOrder PlayerServer { get; set; } = PlayerOrder.player1;
         #endregion
 
         #region constructor
@@ -35,13 +40,19 @@ namespace TennisMatch
         /// Class constructor
         /// </summary>
         /// <param name="isTieBreak">To define if the game is a tie break or a normal game</param>
-        public Game(bool isTieBreak = false)
+        public Game(bool isTieBreak = false, PlayerOrder? previousServer = PlayerOrder.player1)
         {
             Player1Points = 0;
             Player2Points = 0;
 
             IsFinished = false;
             IsTieBreak = isTieBreak;
+
+            if (previousServer.HasValue) {
+                PlayerServer = (previousServer == PlayerOrder.player1)
+                    ? PlayerOrder.player2
+                    : PlayerOrder.player1;
+            }
         }
         #endregion
 
