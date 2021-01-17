@@ -39,6 +39,19 @@ namespace TennisMatch.UI.Model
                 OnPropertyChanged("Player1Name");
             }
         }
+        private bool _player1Server;
+        public bool Player1Server
+        {
+            get
+            {
+                return _player1Server;
+            }
+            set
+            {
+                _player1Server = value;
+                OnPropertyChanged("Player1Server");
+            }
+        }
         private string _player1GameScore;
         public string Player1GameScore
         {
@@ -133,6 +146,19 @@ namespace TennisMatch.UI.Model
                 OnPropertyChanged("Player2Name");
             }
         }
+        private bool _player2Server;
+        public bool Player2Server
+        {
+            get
+            {
+                return _player2Server;
+            }
+            set
+            {
+                _player2Server = value;
+                OnPropertyChanged("Player2Server");
+            }
+        }
         private string _player2GameScore;
         public string Player2GameScore
         {
@@ -222,6 +248,27 @@ namespace TennisMatch.UI.Model
         }
 
         /// <summary>
+        /// Auxiliar method to initialize the match
+        /// </summary>
+        private void InitializeMatch()
+        {
+            Player1GameScore = "0";
+            Player2GameScore = "0";
+            Player1WonGamesSet1 = 0;
+            Player1WonGamesSet2 = 0;
+            Player1WonGamesSet3 = 0;
+            Player1WonGamesSet4 = 0;
+            Player1WonGamesSet5 = 0;
+            Player2WonGamesSet1 = 0;
+            Player2WonGamesSet2 = 0;
+            Player2WonGamesSet3 = 0;
+            Player2WonGamesSet4 = 0;
+            Player2WonGamesSet5 = 0;
+            Player1Server = true;
+            Player2Server = false;
+        }
+
+        /// <summary>
         /// Method to start a tennis match
         /// </summary>
         public void StartMatch()
@@ -231,22 +278,14 @@ namespace TennisMatch.UI.Model
                 bool restartMatch = (Match == null) ? false : true;
 
                 Match = new Match(Player1Name, Player2Name);
-                Player1GameScore = "0";
-                Player2GameScore = "0";
+
+                // force the update the scoreboard with the initial 0-0 points and initial player server
+                UpdatePlayerScores();
+                UpdatePlayerServer();
 
                 if (restartMatch) // new match started, update view with 0 points
-                {
-                    Player1WonGamesSet1 = 0;
-                    Player1WonGamesSet2 = 0;
-                    Player1WonGamesSet3 = 0;
-                    Player1WonGamesSet4 = 0;
-                    Player1WonGamesSet5 = 0;
-                    Player2WonGamesSet1 = 0;
-                    Player2WonGamesSet2 = 0;
-                    Player2WonGamesSet3 = 0;
-                    Player2WonGamesSet4 = 0;
-                    Player2WonGamesSet5 = 0;
-                }
+                    InitializeMatch();
+
                 RefereeInfo = "Match Started!";
             }
             else
@@ -261,6 +300,7 @@ namespace TennisMatch.UI.Model
         {
             if (Match != null)
             {
+                // add the point to the player
                 if (player == "Player1")
                 {
                     Match.AddPlayerPoint(PlayerOrder.player1);
@@ -276,6 +316,8 @@ namespace TennisMatch.UI.Model
                 Player1GameScore = Match.GetPlayerGameScore(PlayerOrder.player1);
                 Player2GameScore = Match.GetPlayerGameScore(PlayerOrder.player2);
 
+                UpdatePlayerScores(); // update the player scores
+                UpdatePlayerServer(); // if needed, update the view with the player server
                 UpdateWonGames(); // if needed, update the view with the won games
 
                 if (Match.IsMatchFinished())
@@ -348,6 +390,35 @@ namespace TennisMatch.UI.Model
 
             if (Match.IsSetFinished())
                 RefereeInfo = winner + " won the SET";
+        }
+
+        /// <summary>
+        /// Auxiliar method to update the player server
+        /// </summary>
+        private void UpdatePlayerServer()
+        {
+            if (Match.GetPlayerServer() == PlayerOrder.player1)
+            {
+                if (!Player1Server)
+                {
+                    Player1Server = true;
+                    Player2Server = false;
+                }
+            }
+            else
+            {
+                if (!Player2Server)
+                {
+                    Player2Server = true;
+                    Player1Server = false;
+                }
+            }
+        }
+
+        private void UpdatePlayerScores()
+        {
+            Player1GameScore = Match.GetPlayerGameScore(PlayerOrder.player1);
+            Player2GameScore = Match.GetPlayerGameScore(PlayerOrder.player2);
         }
     }
 }
