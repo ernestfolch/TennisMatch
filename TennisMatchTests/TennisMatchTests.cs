@@ -317,5 +317,18 @@ namespace TennisMatchTests
             else
                 Assert.IsFalse(match.IsMatchFinished());
         }
+
+        /// <summary>
+        /// Unit test to check if the game server is the correct one
+        /// </summary>
+        [TestMethod]
+        public void PlayerServerTest()
+        {
+            // arrange
+            var match = new Match("Player1 Name", "Player2 Name");
+
+            // assert
+            Assert.AreEqual(PlayerOrder.player1, match.GetPlayerServer());
+        }
     }
 }
