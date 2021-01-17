@@ -5,7 +5,7 @@ Kata project to display tennis score and maintain the state of a tennis match be
 ### Tennis Score Calculation Package 
 Standalone API in charge of a tennis match management. Implemented using TDD.
 
- * check out the [API documentation](TennisScore/Help/TennisMatch.chm)
+ * check out the [API documentation](TennisMatch/Help/TennisMatch.chm)
  
 ##### Example of API usage:
 
